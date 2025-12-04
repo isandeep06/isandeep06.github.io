@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Python EDA portfolio projects by Ozan" />
+    <meta name="author" content="Sandeep M." />
+    <title>Python EDA Projects</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XL6YG0LSV2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XL6YG0LSV2");
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Custom Google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap icons & core CSS  -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <!-- ================  THEME OVERRIDE ================ -->
+    <style>
+      :root {
+        /* colour schema */
+        --gradient-primary: linear-gradient(135deg, #0f4c75 0%, #3282b8 50%, #bbe1fa 100%);
+        --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ffcd3c 100%);
+        --gradient-accent: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+        --gradient-ai: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+        --gradient-matrix: linear-gradient(135deg, #0f3460 0%, #0f4c75 50%, #3282b8 100%);
+        --neon-blue: #00ffff;
+        --neon-purple: #bf00ff;
+        --neon-orange: #ff8c00;
+        --dark-bg: #0d1421;
+        --dark-surface: #1a2332;
+      }
+
+      /* page setup with background image */
+      html,
+      body {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        background: 
+          linear-gradient(135deg, rgba(15, 52, 117, 0.8) 0%, rgba(50, 130, 184, 0.6) 50%, rgba(187, 225, 250, 0.4) 100%),
+          url('ai-background.jpg') center/cover no-repeat fixed;
+        min-height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* AI Circuit Background Animation - updated for new background */
+      .ai-background {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        opacity: 0.12;
+        background-image: radial-gradient(circle at 20% 50%, var(--neon-blue) 2px, transparent 2px),
+          radial-gradient(circle at 80% 50%, var(--neon-purple) 1px, transparent 1px),
+          radial-gradient(circle at 40% 80%, var(--neon-orange) 1px, transparent 1px);
+        background-size: 100px 100px, 150px 150px, 200px 200px;
+        animation: circuit-flow 15s linear infinite;
+      }
+
+      @keyframes circuit-flow {
+        0% {
+          transform: translate(-50px, -50px);
+        }
+        100% {
+          transform: translate(50px, 50px);
+        }
+      }
+
+      /* glassy navbar - enhanced transparency */
+      .navbar {
+        backdrop-filter: blur(20px);
+        background: rgba(13, 20, 33, 0.85) !important;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.25);
+        box-shadow: 0 8px 32px rgba(0, 255, 255, 0.15);
+        transition: all 0.3s ease;
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        right: auto;
+        z-index: 1000;
+        border-radius: 24px;
+        overflow: hidden;
+        width: min(1100px, calc(100% - 40px));
+        transform: translateX(-50%);
+      }
+      .navbar-brand {
+        font-weight: 800;
+        font-size: 1.5rem;
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+      }
+      .navbar-brand::after {
+        content: "⚡";
+        position: absolute;
+        right: -25px;
+        color: var(--neon-orange);
+        animation: pulse-glow 2s infinite;
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          text-shadow: 0 0 5px var(--neon-orange);
+          transform: scale(1);
+        }
+        50% {
+          text-shadow: 0 0 20px var(--neon-orange), 0 0 30px var(--neon-orange);
+          transform: scale(1.1);
+        }
+      }
+      .navbar-nav .nav-link {
+        color: var(--neon-blue) !important;
+        font-weight: 600;
+        margin: 0 10px;
+        position: relative;
+        transition: 0.3s;
+      }
+      .navbar-nav .nav-link:hover {
+        color: white !important;
+        text-shadow: 0 0 10px var(--neon-blue);
+        transform: translateY(-3px);
+      }
+      .navbar-nav .nav-link::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -5px;
+        left: 50%;
+        background: var(--gradient-accent);
+        transition: 0.3s;
+        transform: translateX(-50%);
+        box-shadow: 0 0 10px var(--neon-blue);
+      }
+      .navbar-nav .nav-link:hover::after {
+        width: 100%;
+      }
+
+      /* hero */
+      .hero-section {
+        padding-top: 120px;
+        min-height: 60vh;
+        position: relative;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        background: linear-gradient(135deg, #00ffff 0%, #ffffff 50%, #ff8c00 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+      }
+      .hero-description {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.1rem;
+      }
+      .badge-modern {
+        background: rgba(0, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--neon-blue);
+        color: white;
+        padding: 10px 25px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        animation: neon-pulse 2s infinite;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), inset 0 0 20px rgba(0, 255, 255, 0.08);
+      }
+      @keyframes neon-pulse {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 40px rgba(0, 255, 255, 0.25), inset 0 0 20px rgba(0, 255, 255, 0.08);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(0, 255, 255, 0.7), 0 0 60px rgba(0, 255, 255, 0.4), inset 0 0 30px rgba(0, 255, 255, 0.15);
+        }
+      }
+
+      /* Make "Click an image..." text white */
+      .text-muted {
+        color: rgba(255, 255, 255, 0.9) !important;
+      }
+
+      /* project cards horizontal - enhanced transparency */
+      .project-horizontal {
+        display: flex;
+        gap: 25px;
+        padding: 25px;
+        border-radius: 20px;
+        background: rgba(13, 20, 33, 0.7);
+        backdrop-filter: blur(15px);
+        border: 2px solid rgba(0, 255, 255, 0.15);
+        transition: 0.3s ease;
+        margin-bottom: 35px;
+        box-shadow: 0 6px 20px rgba(0, 255, 255, 0.12);
+      }
+      .project-horizontal:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 255, 255, 0.3), 0 0 30px rgba(0, 255, 255, 0.35);
+        border-color: var(--neon-orange);
+        background: rgba(13, 20, 33, 0.8);
+      }
+      
+      /* Enhanced Image with Hover Effect */
+      .project-horizontal a {
+        text-decoration: none;
+        display: block;
+        position: relative;
+      }
+
+      .project-horizontal img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 3px solid var(--neon-blue);
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      /* Hover overlay effect */
+      .project-horizontal a::before {
+        content: '🚀 Click to Explore Python Analysis';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.95);
+        color: #0d1421;
+        padding: 15px 25px;
+        border-radius: 25px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--neon-orange);
+        box-shadow: 0 10px 30px rgba(255, 255, 255, 0.8);
+        white-space: nowrap;
+      }
+
+      .project-horizontal a:hover::before {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+
+      .project-horizontal a:hover img {
+        filter: brightness(0.7) blur(2px);
+      }
+
+      .project-description h3 {
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+      }
+      .project-description p {
+        color: rgba(255, 255, 255, 0.85);
+        line-height: 1.6;
+      }
+
+      /* scrollbar */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(13, 20, 33, 0.8);
+        border-radius: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--gradient-accent);
+        border-radius: 6px;
+        border: 2px solid rgba(0, 255, 255, 0.25);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--gradient-secondary);
+        box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+      }
+
+      /* responsive */
+      @media (max-width: 991px) {
+        .project-horizontal {
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
+        .project-horizontal img {
+          width: 220px;
+          height: 220px;
+        }
+        
+        .project-horizontal a::before {
+          font-size: 0.8rem;
+          padding: 12px 20px;
+          white-space: normal;
+          text-align: center;
+          max-width: 200px;
+        }
+      }
+    </style>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script>
+      window.FIREBASE_API_KEY = "AIzaSyDt-YuYCFTpbVmBvHFIcLtCXowgKiBgX8w";
+    </script>
+  </head>
+
+  <body class="d-flex flex-column h-100">
+    <!-- AI background grid -->
+    <div class="ai-background"></div>
+
+    <main class="flex-shrink-0">
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg py-3">
+        <div class="container px-5">
+          <a class="navbar-brand" href="index.html"><span class="fw-bolder">Data Analyst & Data Scientist</span></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="resume.html">Resume</a></li>
+              <li class="nav-item"><a class="nav-link" href="Power BI Projects.html">Power BI Projects</a></li>
+              <li class="nav-item"><a class="nav-link" href="ML Projects.html">Machine Learning Projects</a></li>
+              <li class="nav-item"><a class="nav-link" href="LiveProjects.html">Live Projects</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <section class="hero-section text-center text-white">
+        <div class="container px-5">
+          <h1 class="hero-title mb-3">Python Exploratory Data Analysis</h1>
+            <p class="text-muted mt-2">Click on an image to open the full PDF report.</p>
+            <p class="hero-description">Comprehensive analysis of datasets using Python libraries like Pandas, matplotlib, and seaborn</p>
+            <div class="mt-4"><span class="badge-modern">Exploratory Data Analysis</span></div>
+          </div>
+    
+
+          <div class="row gx-5 justify-content-center">
+            <div class="col-lg-11 col-xl-9 col-xxl-8">
+              <!-- Project items injected as‑is from original HTML -->
+               <!-- 1 Car -->
+              <div class="project-horizontal">
+                <a href="https://www.kaggle.com/code/analyticaobscura/car-performance-analysis/notebook" target="_blank">
+                  <img src="img/car.png" alt="Car Performance analysis" />
+                </a>
+                <div class="project-description">
+                  <h3>Car Performance and Analysis</h3>
+                  <p>Compared sales prices, speed, and performance data of luxury brands. Analyses supported with visualizations.</p>
+                </div>
+              </div>
+              <!--  Stroke -->
+              <div class="project-horizontal">
+                <a href="pdf/Stroke.pdf" target="_blank"><img src="img/stroke.png" alt="Stroke analysis" /></a>
+                <div class="project-description">
+                  <h3>Stroke Analysis</h3>
+                  <p>Detailed EDA of the stroke dataset: missing value architecture, variable types, age/gender/medical history interactions. Establishes the foundation before modeling.</p></p>
+                </div>
+              </div>
+              <!-- 2 Laptop -->
+              <div class="project-horizontal">
+                <a href="pdf/laptop.pdf" target="_blank"><img src="img/laptop.png" alt="Laptop price analysis" /></a>
+                <div class="project-description">
+                  <h3>Laptop Price Analysis</h3>
+                  <p>Price factors (RAM, CPU, SSD, resolution) visualized. Outliers removed, categorical values encoded.</p>
+                </div>
+              </div>
+              <!-- 3 Bike sharing -->
+              <div class="project-horizontal">
+                <a href="pdf/store.pdf" target="_blank"><img src="img/bike.png" alt="Bike sharing" /></a>
+                <div class="project-description">
+                    <h3>Bike Sharing Analysis</h3>
+                    <p>Demand, weather, temperature, and humidity insights with hourly usage heatmaps, temporal features, and correlations.</p>
+                </div>
+              </div>
+              <!-- 4 Diabetes -->
+              <div class="project-horizontal">
+                <a href="pdf/diabets.pdf" target="_blank"><img src="img/diabets.png" alt="Diabetes analysis" /></a>
+                <div class="project-description">
+                    <h3>Diabetes Analysis</h3>
+                    <p>Insights on glucose, insulin, BMI, and age; missing-value checks, distribution plots, and target-wise comparisons.</p>
+                </div>
+              </div>
+              <!-- 5 Sleep -->
+              <div class="project-horizontal">
+                <a href="pdf/sleep.pdf" target="_blank"><img src="img/sleep.png" alt="Sleep analysis" /></a>
+                <div class="project-description">
+                    <h3>Sleep Health Analysis</h3>
+                    <p>Sleep patterns versus metabolic, immune, and mental health markers, supported by cleaned data, correlation networks, and chronic risk visuals.</p>
+                </div>
+              </div>
+              <!-- 6 Netflix -->
+              <div class="project-horizontal">
+                <a href="pdf/netfilix.pdf" target="_blank"><img src="img/netflix.png" alt="Netflix trends" /></a>
+                <div class="project-description">
+                  <h3>Netflix Trend Analizing</h3>
+                    <p>User demographics, hourly engagement, and content preferences all feed recommendation insights.</p>
+                </div>
+              </div>
+              <!-- 7 Student -->
+              <div class="project-horizontal">
+                <a href="pdf/student.pdf" target="_blank"><img src="img/student.png" alt="Student performance" /></a>
+                <div class="project-description">
+                  <h3>Student Performance Analysis</h3>
+                  <p>Exam results evaluated in cross-tab with study habits, family support, and school environment. Predictive factors illuminated.</p>
+                </div>
+              </div>
+              <!-- 8 Supermarket -->
+              <div class="project-horizontal">
+                <a href="pdf/market.pdf" target="_blank"><img src="img/market.png" alt="Supermarket analysis" /></a>
+                <div class="project-description">
+                  <h3>Supermarket Analysis</h3>
+                  <p>Revenue by product, seasonality, and region. Campaign uplift and stock guidance derived.</p>
+                </div>
+              </div>
+              <!-- 9 Health expenditure -->
+              <div class="project-horizontal">
+                <a href="pdf/medical.pdf" target="_blank"><img src="img/medical.png" alt="Health spending" /></a>
+                <div class="project-description">
+                  <h3>Health Expenditure Analysis</h3>
+                  <p>Age, body mass index, insurance, and chronic disease cost impacts. Distribution study and regression results.</p>
+                </div>
+              </div>
+              <!-- 10 Real estate -->
+              <div class="project-horizontal">
+                <a href="pdf/emlak.pdf" target="_blank"><img src="img/emlak.png" alt="Real estate" /></a>
+                <div class="project-description">
+                  <h3>Real Estate Analysis</h3>
+                  <p>2001-2022 data cleaned → price trends, economic shocks, regional patterns. Visual narrative of the housing market.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 mt-auto" style="background: rgba(13, 20, 33, 0.9); backdrop-filter: blur(10px); border-top: 2px solid var(--neon-blue); color: white; box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.25);">
+      <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+          <div class="col-auto"><div class="small m-0">© Sandeep M. |  Portfolio</div></div>
+          <div class="col-auto">
+            <a class="small" href="#" style="color: var(--neon-blue); transition: all 0.3s ease;">Privacy</a>
+            <span class="mx-1">&middot;</span>
+            <a class="small" href="#" style="color: var(--neon-blue); transition: all 0.3s ease;">Terms</a>
+            <span class="mx-1">&middot;</span>
+            <a class="small" href="contact.html" style="color: var(--neon-blue); transition: all 0.3s ease;">Contact</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // navbar scroll effect
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".navbar");
+        if (window.scrollY > 50) {
+          nav.style.background = "rgba(13, 20, 33, 0.95)";
+          nav.style.boxShadow = "0 5px 30px rgba(0, 255, 255, 0.35)";
+        } else {
+          nav.style.background = "rgba(13, 20, 33, 0.85)";
+          nav.style.boxShadow = "0 8px 32px rgba(0, 255, 255, 0.15)";
+        }
+      });
+
+      // smooth internal links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      // simple fade‑in load
+      window.addEventListener("load", () => {
+        document.body.style.opacity = "0";
+        document.body.style.transition = "opacity 0.8s ease-in-out";
+        setTimeout(() => {
+          document.body.style.opacity = "1";
+        }, 100);
+      });
+
+      // Dynamic AI background particles
+      function createAIParticle() {
+        const particle = document.createElement('div');
+        particle.style.position = 'fixed';
+        particle.style.width = Math.random() * 4 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.background = `rgba(0, 255, 255, ${Math.random() * 0.5})`;
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * window.innerWidth + 'px';
+        particle.style.top = window.innerHeight + 'px';
+        particle.style.pointerEvents = 'none';
+        particle.style.zIndex = '-1';
+        particle.style.boxShadow = `0 0 ${Math.random() * 10 + 5}px rgba(0, 255, 255, 0.5)`;
+        
+        document.body.appendChild(particle);
+        
+        const duration = Math.random() * 3000 + 2000;
+        const drift = (Math.random() - 0.5) * 100;
+        
+        particle.animate([
+          { 
+            transform: `translateY(0px) translateX(0px)`,
+            opacity: 0
+          },
+          { 
+            transform: `translateY(-${window.innerHeight + 100}px) translateX(${drift}px)`,
+            opacity: 1
+          },
+          { 
+            transform: `translateY(-${window.innerHeight + 200}px) translateX(${drift * 2}px)`,
+            opacity: 0
+          }
+        ], {
+          duration: duration,
+          easing: 'linear'
+        }).onfinish = () => {
+          particle.remove();
+        };
+      }
+
+      // Create AI particles periodically
+      setInterval(createAIParticle, 800);
+    </script>
+  </body>
+</html>
